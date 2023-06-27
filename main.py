@@ -17,7 +17,7 @@ def process_url():
 
   response = openai.Completion.create(
     engine='davinci',
-    prompt=f"Generate knowledge graph for {url}.",
+    prompt=f"Generate knowledge graph for this {url}.",
     max_tokens=200,
     temperature=0.5,
     n=1,
