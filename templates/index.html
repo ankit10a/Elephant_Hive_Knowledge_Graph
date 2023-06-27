@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Elephant Hive</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 10vh;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+        
+        .inputContainer {
+            text-align: center;
+        }
+        
+        .searchBar {
+            padding: 10px;
+            width: 400px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .apiKeyTextField {
+            padding: 10px;
+            width: 400px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .submit,
+        .clearButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .submit:hover,
+        .clearButton:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Elephant Hive Knowledge Graph </h1>
+    <form id="url-form" method="POST" action="/">
+        <div class="inputContainer">
+            <input class="searchBar" name="url" placeholder="Describe your graph..."> <!-- Added the name attribute -->
+            <br>
+            <input class="apiKeyTextField" name="api_key" type="password" placeholder="Enter your OpenAI API key..."> <!-- Added the name attribute -->
+            <br>
+            <button class="submit" type="submit">Generate</button> <!-- Added the type attribute -->
+            <button class="clearButton" type="reset">Clear</button> <!-- Added the type attribute -->
+        </div>
+    </form>
+    <div id="knowledge-graph-container"></div>
+    <script src="script.js"></script>
+</body>
+</html>
