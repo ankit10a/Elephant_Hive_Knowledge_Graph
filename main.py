@@ -11,6 +11,11 @@ def index():
   return render_template('index.html')
 
 
+@app.route('/')
+def app():
+  return render_template('app.js')
+
+
 @app.route('/', methods=['POST'])
 def process_url():
   url = request.form['url']
