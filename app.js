@@ -258,7 +258,7 @@ function App() {
       <div className='graphContainer'>
         <Graph graph={graphState} options={options} style={{ height: "640px" }} />
       </div>
-      <p className='footer'>Pro tip: don't take a screenshot! You can right-click and save the graph as a .png  📸</p>
+     
     </div>
   );
 }

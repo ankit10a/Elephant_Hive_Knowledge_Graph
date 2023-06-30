@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import openai
 
-openai.api_key = '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'
+
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
@@ -14,10 +14,10 @@ def index():
 @app.route('/', methods=['POST'])
 def process_url():
   url = request.form['url']
-
+  openai.api_key = request.form['api_key']
   response = openai.Completion.create(
-    engine='davinci',
-    prompt=f"Generate knowledge graph for this {url}.",
+    engine='text-davinci-003',
+    prompt=f"Generate knowledge graph for {url}.",
     max_tokens=200,
     temperature=0.5,
     n=1,
