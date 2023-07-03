@@ -3,13 +3,13 @@ Elephant Hive Knowledge Graph
 
 
 The client is seeking a software program in Python that can efficiently and effectively build knowledge graphs to visualize connections and relationships between different types of content. 
-Requirements:
+# Requirements:
 •	Develop a software program(s) in Python to build knowledge graphs showing the connections and relationships between disparate content, such as web articles, PDFs, research papers and other text-based materials, in an efficient and effective manner. 
 •	Ideally, if possible, the knowledge graphs could be created via an API so that it can be integrated easily with any app or local instances of Elephant Hive.
 Objective:
 The objective is to outline the necessary steps to set up the Flask application, establish communication with the OpenAI API, process user input, and generate a knowledge graph based on the provided URL, Text .
 
-#Methodologies:
+# Methodologies:
 
 Set up Flask and OpenAI:
 •	Import the necessary libraries: Flask and render_template from Flask, and openai.
@@ -29,7 +29,7 @@ Create the URL processing route:
 •	Extract the graph from the API response.
 •	Return the graph to be displayed on the web page.
 
-#Run the Flask application:
+# Run the Flask application:
 
 •	Add the necessary conditional block to run the Flask application when executed directly.
 Create the index.html template:
@@ -37,6 +37,8 @@ Create the index.html template:
 •	Include CSS styles to format the elements.
 •	Add a form to submit the URL and API key.
 •	Display the knowledge graph container.
-Create the JavaScript file (script.js):
+
+# Create the JavaScript file (script.js):
+
 •	Add any necessary JavaScript code for handling user interaction or dynamic updates.
 Create the react file (react.js):
