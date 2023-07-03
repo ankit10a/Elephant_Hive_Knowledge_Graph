@@ -67,16 +67,15 @@
   <header id="myheader" style="background:darkcyan; color:white; padding:10px 20px;">
   Elephant Hive Knowledge Graph
 </header></h1>
-<img src="templates/ele.png" alt="Logo" class="logo">
 
-    <form id="url-form" method="POST" action="/">
+    <form id="url-form" method="POST" >
         <div class="inputContainer">
-            <input class="searchBar" name="url" placeholder="Describe your graph..."> <!-- Added the name attribute -->
+            <input class="searchBar" name="url" placeholder="Describe your graph...">
             <br>
-            <input class="apiKeyTextField" name="api_key" type="password" placeholder="Enter your OpenAI API key..."> <!-- Added the name attribute -->
+            <input class="apiKeyTextField" name="api_key" type="password" placeholder="Enter your OpenAI API key..."> 
             <br>
-            <button class="submit" type="submit">Generate</button> <!-- Added the type attribute -->
-            <button class="clearButton" type="reset">Clear</button> <!-- Added the type attribute -->
+            <button class="submit" type="submit">Generate</button> 
+            <button class="clearButton" type="reset">Clear</button>
         </div>
     </form>
     <div id="knowledge-graph-container"></div>
@@ -98,6 +97,8 @@
     })
   };
 
+  var res = "";
+
   const updateGraph = (updates) => {
     // updates will be provided as a list of lists
     // each list will be of the form [ENTITY1, RELATION, ENTITY2] or [ENTITY1, COLOR]
@@ -105,7 +106,7 @@
     var current_graph = JSON.parse(JSON.stringify(graphState));
 
     if (updates.length === 0) {
-      return;
+       return;
     }
 
     // check type of first element in updates
@@ -113,12 +114,13 @@
       // updates is a list of strings
       updates = [updates]
     }
+console.log(update)
 
     updates.forEach(update => {
       if (update.length === 3) {
         // update the current graph with a new relation
         const [entity1, relation, entity2] = update;
-
+        
         // check if the nodes already exist
         var node1 = current_graph.nodes.find(node => node.id === entity1);
         var node2 = current_graph.nodes.find(node => node.id === entity2);
@@ -262,6 +264,7 @@
             const { choices } = response;
             const text = choices[0].text;
             console.log(text);
+            console.log("choices",choices, response)
 
             const new_graph = JSON.parse(text);
 
@@ -277,6 +280,7 @@
       })
   };
 
+    
   const queryPrompt = (prompt, apiKey) => {
     if (SELECTED_PROMPT === "STATELESS") {
       queryStatelessPrompt(prompt, apiKey);
@@ -288,8 +292,6 @@
       document.getElementsByClassName("generateButton")[0].disabled = false;
     }
   }
-
-
   const createGraph = () => {
     document.body.style.cursor = 'wait';
 
@@ -299,7 +301,7 @@
 
     queryPrompt(prompt, apiKey);
   }
-
+    
 </script>
 </body>
 </html>
