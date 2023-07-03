@@ -40,5 +40,7 @@ Create the index.html template:
 
 # Create the JavaScript file (script.js):
 
-•	Add any necessary JavaScript code for handling user interaction or dynamic updates.
-Create the react file (react.js):
+•	JavaScript code for handling user interaction or dynamic updates.
+# React file (react.js):
+
+File for visulization
