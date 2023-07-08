@@ -23,11 +23,16 @@ def index():
       frequency_penalty=0,
       presence_penalty=0)
 
-    # Extract the graph from the API response
-    graph = response.choices[0].text.strip()
+    # Check if response.choices list is not empty before accessing elements
+    if len(response.choices) > 0:
+      graph = response.choices[0].text.strip()
+      graph = graph.replace(": ", ":\n")
+      graph = graph.replace("- ", "-\n")
+      graph = graph.split("\n")
 
-    # Return the graph to be displayed in the graph container
-    return graph
+      return graph
+    else:
+      return "No graph generated."
 
 
 if __name__ == '__main__':
