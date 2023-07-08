@@ -29,10 +29,17 @@ def index():
       graph = graph.replace(": ", ":\n")
       graph = graph.replace("- ", "-\n")
       graph = graph.split("\n")
+      # Create table rows
+      table_rows = []
+      for item in graph:
+        table_rows.append(
+          {'element':
+           item})  # Assuming 'element' is the key for each table row
 
-      return graph
-    else:
-      return "No graph generated."
+    return render_template('result.html',
+                           rows=table_rows)  # Render the result.html template
+  else:
+    return "No graph generated."
 
 
 if __name__ == '__main__':
