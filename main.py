@@ -14,7 +14,7 @@ def index():
     openai.api_key = request.form['api_key']
     response = openai.Completion.create(
       engine='text-davinci-003',
-      prompt=f"Generate knowledge graph for {url}.",
+      prompt=f"Generate a knowledge graph for {url}.",
       max_tokens=200,
       temperature=0.5,
       n=1,
@@ -30,16 +30,12 @@ def index():
       graph = graph.replace("- ", "-\n")
       graph = graph.split("\n")
       # Create table rows
-      table_rows = []
-      for item in graph:
-        table_rows.append(
-          {'element':
-           item})  # Assuming 'element' is the key for each table row
+      table_rows = [{'element': item} for item in graph]
 
-    return render_template('result.html',
-                           rows=table_rows)  # Render the result.html template
-  else:
-    return "No graph generated."
+      return render_template(
+        'result.html', rows=table_rows)  # Render the result.html template
+
+  return "No graph generated."
 
 
 if __name__ == '__main__':

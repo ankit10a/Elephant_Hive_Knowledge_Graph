@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Table Rows</title>
+    <style>
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+            color:skyblue;
+        }
+        ul ul {
+            margin-left: 20px;
+        }
+        li {
+            color: black;
+        }
+        li.edge {
+            color: blue;
+        }
+      tr:hover {background-color: #D6EEEE;}
+    </style>
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>Elements</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in rows %}
-            <tr>
-                <td>{{ row.element }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <ul>
+        <!-- Replace the table structure with nested ul elements -->
+        {% for row in rows %}
+        <li {% if row.is_edge %}class="edge"{% endif %}>
+            {{ row.element }}
+            {% if row.children %}
+            <ul>
+                {% for child in row.children %}
+                <li {% if child.is_edge %}class="edge"{% endif %}>
+                    {{ child.element }}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
