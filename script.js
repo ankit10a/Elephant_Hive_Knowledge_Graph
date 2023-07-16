@@ -1,6 +1,6 @@
 const form = document.getElementById('url-form');
-const urlInput = document.getElementById('url-input');
-const graphContainer = document.getElementById('knowledge-graph-container');
+const urlInput = document.getElementById('url');
+const graphContainer = document.getElementById('graphTable');
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -10,5 +10,5 @@ form.addEventListener('submit', (event) => {
     // to generate or retrieve the knowledge graph data
 
     // Example: Display the URL as plain text in the graph container
-    graphContainer.innerText = url;
+    graphContainer.innerHTML = `<tr><td>${url}</td></tr>`;
 });

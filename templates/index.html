@@ -82,7 +82,7 @@
     }
     #app
   {
-  width:1000px;
+  width:1200px;
   height:800px;
   background-color:#eaedef;
   margin:0 auto;
@@ -140,6 +140,7 @@
         // Update the graph container with the generated graph
         var graphTable = document.getElementById("graphTable");
         graphTable.innerHTML = graph;
+        form.reset()
       })
       .catch(function(error) {
         console.log(error);

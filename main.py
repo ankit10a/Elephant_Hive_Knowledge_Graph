@@ -1,5 +1,14 @@
 from flask import Flask, render_template, request
 import openai
+import json
+import networkx as nx
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
+
+import matplotlib
+
+matplotlib.use('Agg')
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -23,19 +32,38 @@ def index():
       frequency_penalty=0,
       presence_penalty=0)
 
-    # Check if response.choices list is not empty before accessing elements
     if len(response.choices) > 0:
       graph = response.choices[0].text.strip()
       graph = graph.replace(": ", ":\n")
       graph = graph.replace("- ", "-\n")
       graph = graph.split("\n")
-      # Create table rows
-      table_rows = [{'element': item} for item in graph]
 
-      return render_template(
-        'result.html', rows=table_rows)  # Render the result.html template
+    graph_data = convertGraphToTree(graph)
 
-  return "No graph generated."
+    # Generate the graph image
+    plt.figure(figsize=(10, 6))
+    nx.draw(graph_data, with_labels=True)
+
+    # Convert the graph image to base64 format
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+    plt.close()
+
+    return render_template('result.html',
+                           graph_data=graph_data,
+                           image_base64=image_base64)
+
+
+def convertGraphToTree(graph):
+  G = nx.DiGraph()
+  for item in graph:
+    if "->" in item:
+      source, target = item.split("->")
+      G.add_edge(source.strip(), target.strip())
+  return G
 
 
 if __name__ == '__main__':

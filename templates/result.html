@@ -1,41 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Elephant Hive - Result</title>
     <style>
         ul {
             list-style-type: none;
             padding-left: 20px;
-            color:skyblue;
+            color: skyblue;
         }
+
         ul ul {
             margin-left: 20px;
         }
+
         li {
             color: black;
         }
+
         li.edge {
             color: blue;
         }
-      tr:hover {background-color: #D6EEEE;}
+
+        tr:hover {
+            background-color: #D6EEEE;
+        }
     </style>
 </head>
 <body>
     <ul>
-        <!-- Replace the table structure with nested ul elements -->
-        {% for row in rows %}
-        <li {% if row.is_edge %}class="edge"{% endif %}>
-            {{ row.element }}
-            {% if row.children %}
-            <ul>
-                {% for child in row.children %}
-                <li {% if child.is_edge %}class="edge"{% endif %}>
-                    {{ child.element }}
-                </li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-        </li>
-        {% endfor %}
+        <li>{{ graph_data['edge'] }}</li>
+        <ul>
+            {% for node in graph_data['node'] %}
+            <li>
+                {{ node['element'] }}
+                {% if 'children' in node %}
+                <ul>
+                    {% for child in node['children'] %}
+                    <li {% if 'is_edge' in child and child['is_edge'] %}class="edge"{% endif %}>
+                        {{ child['element'] }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
     </ul>
+    <img src="data:image/png;base64,{{ image_base64 }}" alt="Knowledge Graph">
 </body>
 </html>
