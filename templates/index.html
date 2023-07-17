@@ -57,6 +57,11 @@
       background-color: #45a049;
     }
 
+    .file:hover {
+      background-color: #45a049;
+    }
+
+    
     .logo {
       max-width: 100px;
     }
@@ -82,8 +87,8 @@
     }
     #app
   {
-  width:1200px;
-  height:800px;
+  width:1500px;
+  height:900px;
   background-color:#eaedef;
   margin:0 auto;
   top:10px;
@@ -110,6 +115,8 @@
       <br>
       <button class="submit" type="submit">Generate</button> 
       <button class="clearButton" type="reset">Clear</button>
+      <input class="file" type="file" id="myFile" name="filename">
+      <input class="submit" type="submit">
     </div>
   </form>
   
@@ -140,7 +147,7 @@
         // Update the graph container with the generated graph
         var graphTable = document.getElementById("graphTable");
         graphTable.innerHTML = graph;
-        form.reset()
+        //form.reset()
       })
       .catch(function(error) {
         console.log(error);
