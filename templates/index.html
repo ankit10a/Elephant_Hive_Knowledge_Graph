@@ -10,6 +10,7 @@
       align-items: center;
       justify-content: center;
       min-height: 10vh;
+      background-color: floralwhite;
     }
     
     h1 {
@@ -53,14 +54,10 @@
     }
     
     .submit:hover,
-    .clearButton:hover {
-      background-color: #45a049;
-    }
-
+    .clearButton:hover,
     .file:hover {
       background-color: #45a049;
     }
-
     
     .logo {
       max-width: 100px;
@@ -85,76 +82,74 @@
     th {
       background-color: #f2f2f2;
     }
-    #app
-  {
-  width:1500px;
-  height:900px;
-  background-color:#eaedef;
-  margin:0 auto;
-  top:10px;
-  position:relataive;
-  border-radius:5px;
-  box-shadow:0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  }
-
+    
+    #app {
+      width: 1500px;
+      height: 900px;
+      background-color: #eaedef;
+      margin: 0 auto;
+      top: 10px;
+      position: relative;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
   </style>
 </head>
-<body style="background-color:floralwhite;">
+<body>
   <div id="app" class="container">
-  <h1> 
-    <header id="myheader" style="background:darkcyan; color:white; padding:10px 20px;">
-      Elephant Hive Knowledge Graph
-    </header>
-  </h1>
+    <h1> 
+      <header id="myheader" style="background:darkcyan; color:white; padding:10px 20px;">
+        Elephant Hive Knowledge Graph
+      </header>
+    </h1>
 
-  <form id="url-form" method="POST">
-    <div class="inputContainer">
-      <input class="searchBar" name="url" placeholder="Describe your graph...">
-      <br>
-      <input class="apiKeyTextField" name="api_key" type="password" placeholder="Enter your OpenAI API key..."> 
-      <br>
-      <button class="submit" type="submit">Generate</button> 
-      <button class="clearButton" type="reset">Clear</button>
-      <input class="file" type="file" id="myFile" name="filename">
-      <input class="submit" type="submit">
-    </div>
-  </form>
+    <form id="url-form" method="POST">
+      <div class="inputContainer">
+        <input class="searchBar" name="url" placeholder="Describe your graph...">
+        <br>
+        <input class="apiKeyTextField" name="api_key" type="password" placeholder="Enter your OpenAI API key..."> 
+        <br>
+        <button class="submit" type="submit">Generate</button> 
+        <button class="clearButton" type="reset">Clear</button>
+        <input class="file" type="file" id="myFile" name="filename">
+      </div>
+    </form>
   
-  <div class="graphContainer">
-    <table id="graphTable">
-      <!-- Graph data will be dynamically generated here -->
-    </table>
-  </div>
+    <div class="graphContainer">
+      <table id="graphTable">
+        <!-- Graph data will be dynamically generated here -->
+      </table>
+    </div>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 
-  <script>
-    // JavaScript code for sending the form data and updating the graph container
-    document.getElementById("url-form").addEventListener("submit", function(event) {
-      event.preventDefault(); // Prevent form submission
+    <script>
+      // JavaScript code for sending the form data and updating the graph container
+      document.getElementById("url-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form submission
 
-      var form = event.target;
-      var formData = new FormData(form);
+        var form = event.target;
+        var formData = new FormData(form);
 
-      fetch("/", {
-        method: "POST",
-        body: formData
-      })
-      .then(function(response) {
-        return response.text();
-      })
-      .then(function(graph) {
-        // Update the graph container with the generated graph
-        var graphTable = document.getElementById("graphTable");
-        graphTable.innerHTML = graph;
-        //form.reset()
-      })
-      .catch(function(error) {
-        console.log(error);
-        alert("An error occurred while generating the graph. Please try again.");
+        fetch("/", {
+          method: "POST",
+          body: formData
+        })
+        .then(function(response) {
+          return response.text();
+        })       
+        .then(function(graph) {
+          // Update the graph container with the generated graph
+          var graphTable = document.getElementById("graphTable");
+          graphTable.innerHTML = graph;
+          //form.reset()
+        })
+        .catch(function(error) {
+          console.log(error);
+          alert("An error occurred while generating the graph. Please try again.");
+        });
       });
-    });
-  </script>
-</div>
+    </script>
+  </div>
 </body>
 </html>
